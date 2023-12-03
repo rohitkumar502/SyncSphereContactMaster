@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{normal/nbase::layout(~{::section})}" >
+<head>
+    <meta charset="UTF-8">
+    <title>Home page</title>
+</head>
+<body>
+<section>
+
+    <div class="container">
+        <div class="card">
+
+            <div class="card-body my-5">
+
+                <div class="container text-center">
+                    <img  class="my_profile_picture" style="height: 200px; width: 200px;"
+                          th:src="@{'/img/contact_logo.png'}" alt="profile_pic" />
+                </div>
+
+                <h1 class="text-center mt-3 text-secondary font-italic font-weight-light">
+                    Start adding your contact on cloud...
+                </h1>
+
+                <a th:href="@{/user/add-contact}" class="btn btn-primary btn-block text-uppercase mt-5">
+                    Add New Contact</a>
+
+                    <hr/>
+
+                <div class="container donate" style="background-color: orange; padding: 25px;">
+                    <h3 class="my-1">Donate Us</h3>
+                    <form onsubmit="paymentStart(); return false;"> <!-- Prevent form submission for this example -->
+                        <input id="payment_field" type="text" class="form-control my-2" placeholder="Enter amount here" autofocus />
+                        <div class="container text-center mt-3">
+                            <button type="submit" class="btn btn-block text-white" style="background-color: blue;">Pay</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+<!--    To highlight sidebar link for the respective currently working page,  start-->
+    <script>
+       $(document).ready(()=>{
+           $('.item').removeClass('active');
+           $("#dashboard-link").addClass("active");
+
+       });
+    </script>
+    <!--    To highlight sidebar link for the respective currently working page, end -->
+
+
+</section>
+
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::section})}" >
+<head>
+    <meta charset="UTF-8">
+    <title>Home page</title>
+
+</head>
+<body>
+    <section class="banner d-flex justify-content-center align-items-center">
+        <div class="text-center " style="margin-top: 450px;">
+            <button class="btn1 btn-lg text-purple">
+                <a th:href="@{/user/dashboard}" style="text-decoration: none; color: inherit;">Get Started</a>
+            </button>
+
+        </div>
+    </section>
+
+</body>
+</html>

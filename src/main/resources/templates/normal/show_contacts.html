@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{normal/nbase::layout(~{::section})}" >
+<head>
+    <meta charset="UTF-8">
+    <title>view contacts page</title>
+</head>
+<body>
+    <section>
+
+        <div class="card ml-3">
+            <div class="card-body">
+
+                <h1 class="text-center">Your Contacts</h1>
+
+<!--                Search Functionality Start-->
+
+                <div class="search-container my-4">
+
+                    <input onkeyup="search()"  id="search-input" type="text" class="form-control"
+                           placeholder="Search your contacts" />
+
+                     <div class="search-result">
+                      <!--   Result goes here        -->
+                         <h1>This is result</h1>
+
+                     </div>
+
+                </div>
+
+<!--                Search Functionality End-->
+
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">#ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr th:each="c : ${contacts}">
+                         <th scope="row" th:text="SCM2023+${c.cId}">Contact Id</th>
+                        <td >
+                            <img  th:src="@{'/img/'+${c.imgName}}" alt="profile photo"
+                                  class="my_profile_picture"/>
+                            <span th:text="${c.name}"></span>
+                        </td>
+                        <td>
+                            <a  th:href="@{'/user/'+${c.cId}+'/contact'}" >
+                                <span  th:text="${c.email}"></span>
+                            </a>
+                        </td>
+                        <td th:text="${c.phone}">Contact Phone</td>
+                        <td>
+
+                        <div style="display: flex;" >
+                            <form th:action="@{'/user/update_contact/'+${c.cId}}" method="post" >
+                                <button type="submit"  class="btn btn-primary btn-sm">Update</button>
+                            </form>
+                                &nbsp;
+                            <a  href="#" th:onclick="|deleteContact(${c.cId})|" class="btn btn-danger btn-sm ">Delete</a>
+                        </div>
+
+                        </td>
+                    </tr>
+                    </tbody>
+
+                </table>
+            </div>
+
+        <!--                Pagination Part Start   -->
+                <nav aria-label="Page navigation example">
+
+                    <ul class="pagination">
+
+                        <li th:if="${currentPageNo != 0}" class="page-item">
+                            <a class="page-link" href="#" th:href="@{'/user/show_contacts/'+${currentPageNo-1} }">Previous</a></li>
+
+                        <li  th:classappend="${currentPageNo==(i-1) ? 'active' : ''}"
+                                th:each="i : ${#numbers.sequence(1, totalPages)}" class="page-item">
+                            <a th:href="@{'/user/show_contacts/'+${i-1} }" class="page-link" href="#">
+                                <span th:text="${i}"></span></a></li>
+
+                        <li th:if="${currentPageNo+1 != totalPages}" class="page-item">
+                            <a class="page-link" href="#" th:href="@{'/user/show_contacts/'+${currentPageNo+1} }">Next</a></li>
+
+                    </ul>
+                </nav>
+
+        <!--    Pagination Part End   -->
+
+
+            </div>
+        </div>
+
+        <!--    To highlight sidebar link for the respective currently working page,  start-->
+        <script>
+            $(document).ready(()=>{
+                $('.item').removeClass('active');
+                $("#viewcontact-link").addClass("active");
+
+            });
+        </script>
+        <!--    To highlight sidebar link for the respective currently working page, end -->
+
+    </section>
+
+</body>
+</html>

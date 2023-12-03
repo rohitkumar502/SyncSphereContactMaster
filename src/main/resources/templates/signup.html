@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::section})}" >
+<head>
+    <meta charset="UTF-8">
+    <title>Home page</title>
+</head>
+<body>
+    <section>
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-8 offset-md-2">
+
+                    <div class="my-card mt-1">
+
+                        <div th:if="${session.message}" th:classappend="${session.message.type}"
+                             class="alert" role="alert">
+                            <p class="text-center" th:text="${session.message.content}"></p>
+                            <!--  remove the message   -->
+                            <th:block th:text="${@sessionHelper.removeMessageFromSession()}"></th:block>
+                        </div>
+
+                        <div class="container text-center">
+                           <img style="width:180px" src="" th:src="@{/img/register_promo.jpg}" alt="Register image" />
+                       </div>
+
+                        <h1 class="text-center">Register Here !!</h1>
+
+                        <form novalidate th:action="@{/do_register}" method="post" th:object="${user}">
+
+                        <!-- Name field-->
+                            <div class="form-group">
+                                <label for="name1">Your Name</label>
+                                <input name="name"
+                                        type="text" class="form-control"
+                                       th:classappend="${#fields.hasErrors('name') ? 'is-invalid' : ''}"
+                                       id="name1"
+                                       placeholder="Enter your name" required
+                                        th:value="${user.name}" >
+                                <div class="invalid-feedback" th:each="e:${#fields.errors('name')}" th:text="${e}">
+                                </div>
+                            </div>
+
+
+                            <!-- Email field-->
+                            <div class="form-group">
+                                <label for="email1">Your Email</label>
+                                <input name="email"
+                                        type="email" class="form-control" id="email1"
+                                       placeholder="Enter your email" required
+                                       th:value="${user.email}" />
+                            </div>
+
+                            <!-- Password field-->
+                            <div class="form-group">
+                                <label for="password1">Your Password</label>
+                                <input  name="password"
+                                        type="password" class="form-control" id="password1"
+                                       placeholder="Enter your password" required
+                                        th:value="${user.password}" />
+                            </div>
+
+                            <!-- User about field-->
+                            <div class="form-group">
+                                <textarea name="about"
+                                        class="form-control" rows="5"
+                                    placeholder="Enter something about yourself"
+                                    th:text="${user.about}"></textarea>
+                            </div>
+
+                            <!-- Terms and conditions agreement  -->
+                            <div class="form-group form-check">
+                                <input  name="agreement"
+                                        type="checkbox"
+                                       class="form-check-input" id="agreement" />
+
+                                <label for="agreement">Accept terms and conditions</label>
+                            </div>
+
+                            <div class="container text-center">
+                                <button type="submit" class="btn bg-purple text-white">Submit</button>
+                                <button type="reset" class="btn btn-warning">Reset</button>
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+
+</body>
+</html>
