@@ -28,7 +28,7 @@ public class HomeController {
     @GetMapping("/")
     public String home(Model m)
     {
-        m.addAttribute("title", "Home - Smart Contact Manager");
+        m.addAttribute("title", "Home - SyncSphereContactMaster");
         return "home";
     }
 

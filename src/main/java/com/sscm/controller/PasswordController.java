@@ -40,14 +40,10 @@ public class PasswordController {
                                  Principal principal, HttpSession session)
     {
 
-        System.out.println(oldPassword);
-        System.out.println(newPassword);
-        System.out.println(confirmPassword);
-
         String userName = principal.getName();
 
         User currentUser = userRepos.getUserByUserName(userName);
-        System.out.println(currentUser);
+//        System.out.println(currentUser);
 
         if ( passwordEncoder.matches(oldPassword, currentUser.getPassword()) &&
                 !newPassword.equals(oldPassword) && newPassword.equals(confirmPassword) )
