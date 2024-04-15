@@ -37,7 +37,7 @@ public class PaymentController {
         double amt = Double.parseDouble(data.get("amount").toString());
 //        System.out.println(amt);
 
-        var client = new RazorpayClient("rzp_test_v3x9FAyRos2UEk","8v6n0c5EMZobNeKSD2wFU9pP");
+        var client = new RazorpayClient("rzp_test_v3x9FAyRos2Ucv","8v6n0c5EMZobNeKSD2wFU9fK");
 
         JSONObject obj = new JSONObject();
         obj.put("amount", amt*100);
